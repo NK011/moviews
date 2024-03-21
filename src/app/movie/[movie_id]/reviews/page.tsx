@@ -4,6 +4,14 @@ import Review from "@/components/Reviews/Review";
 import { trpc } from "@/server/client";
 import React, { Suspense } from "react";
 
+type review = {
+    id: number;
+    movie_id: number;
+    rating: string;
+    reviewer_name: string | null;
+    review_comments: string | null;
+};
+
 function MovieReviews({ params }: { params: { movie_id: string } }) {
     const movieData = trpc.movies.getMovie.useQuery({
         id: parseInt(params.movie_id),
@@ -33,7 +41,7 @@ function MovieReviews({ params }: { params: { movie_id: string } }) {
                 <ul className="px-4 grid grid-cols-3 gap-3">
                     <Suspense fallback={<p>Loadingggggg..........</p>}>
                         {movieReviews?.length
-                            ? movieReviews?.map((review, key) => (
+                            ? movieReviews?.map((review: review, key) => (
                                   <Review
                                       id={review.id}
                                       rating={review.rating}
