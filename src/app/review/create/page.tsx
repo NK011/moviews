@@ -2,6 +2,13 @@
 import { trpc } from "@/server/client";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 
+type movie = {
+    id: number;
+    name: string;
+    release_date: string;
+    average_rating: string | null;
+}
+
 function ReviewForm() {
     const moviesList = trpc.movies.getMovies.useQuery().data;
     const [selectedMovie, setSelectedMovie] = useState<number | undefined>(
@@ -38,7 +45,7 @@ function ReviewForm() {
                     onChange={(e) => setSelectedMovie(parseInt(e.target.value))}
                 >
                     <option disabled value={0}>Select movie</option>
-                    {moviesList?.map((movie, id) => (
+                    {moviesList?.map((movie: movie, id: number) => (
                         <option key={id} value={movie.id}>{movie.name}</option>
                     ))}
                 </select>

@@ -41,7 +41,7 @@ function MovieReviews({ params }: { params: { movie_id: string } }) {
                 <ul className="px-4 grid grid-cols-3 gap-3">
                     <Suspense fallback={<p>Loadingggggg..........</p>}>
                         {movieReviews?.length
-                            ? movieReviews?.map((review: review, key) => (
+                            ? movieReviews?.map((review: review, key: number) => (
                                   <Review
                                       id={review.id}
                                       rating={review.rating}
