@@ -2,6 +2,14 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
+type review = {
+  id: number;
+  movie_id: number;
+  reviewer_name: string;
+  rating: object;
+  review_comments: string;
+}
+
 // Function to calculate the average rating of a movie
 const calculateAverageRating = async (movieId: number): Promise<number | null> => {
   const reviews = await prisma.reviews.findMany({
@@ -12,7 +20,7 @@ const calculateAverageRating = async (movieId: number): Promise<number | null> =
     return null; // No reviews, return null
   }
 
-  const totalRating = reviews.reduce((acc, review) => acc + Number(review.rating), 0);
+  const totalRating = reviews.reduce((acc: number, review: review) => acc + Number(review.rating), 0);
   const averageRating = totalRating / reviews.length;
   return averageRating;
 };
