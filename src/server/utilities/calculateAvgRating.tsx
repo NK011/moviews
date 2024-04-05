@@ -1,6 +1,5 @@
 // Assume you have a Prisma model for Movie and Review
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma';
 
 type review = {
   id: number;
