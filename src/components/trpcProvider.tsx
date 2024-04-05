@@ -10,7 +10,7 @@ function Provider({ children }: { children: React.ReactNode }) {
         trpc.createClient({
             links: [
                 httpBatchLink({
-                    url: `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/trpc`,
+                    url: `/api/trpc`,
                 }),
             ],
         })
